@@ -1,0 +1,17 @@
+{
+  "name": "Cantinho da Ivone",
+  "short_name": "Ivone",
+  "description": "Um espaço pessoal de oração, esperança e serenidade para Ivone da Rosa Ferreira.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f5f3ea",
+  "theme_color": "#6f8f72",
+  "icons": [
+    {
+      "src": "assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

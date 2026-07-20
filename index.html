@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#6f8f72">
+  <meta name="description" content="Um cantinho pessoal de oração, serenidade e esperança para Ivone da Rosa Ferreira.">
+  <title>Cantinho da Ivone</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="animated-bg" aria-hidden="true">
+    <span class="orb orb1"></span><span class="orb orb2"></span><span class="orb orb3"></span>
+    <span class="leaf leaf1">❧</span><span class="leaf leaf2">❧</span><span class="leaf leaf3">❧</span>
+    <div class="stars"></div>
+  </div>
+
+  <header class="topbar">
+    <a href="#inicio" class="brand"><span>🕊️</span> Cantinho da Ivone</a>
+    <div class="top-actions">
+      <button class="icon-btn" id="soundToggle" title="Som ambiente" aria-label="Som ambiente">♫</button>
+      <button class="icon-btn" id="themeToggle" title="Modo noturno" aria-label="Modo noturno">☾</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero shell" id="inicio">
+      <div class="reveal">
+        <p class="eyebrow">Um espaço só seu</p>
+        <h1 id="personalGreeting">Bom dia, Ivone.</h1>
+        <p class="hero-copy">Que a paz de Deus e dos bons espíritos acompanhe cada passo do seu dia. Este cantinho foi criado com muito amor pelo seu filho.</p>
+        <div class="date-pill"><span>☀</span><time id="todayDate"></time></div>
+        <div class="actions">
+          <a class="btn primary" href="#mensagem">Receber minha mensagem</a>
+          <button class="btn ghost" id="quickPrayerButton">Fazer uma prece</button>
+        </div>
+      </div>
+      <div class="hero-art reveal" aria-hidden="true">
+        <div class="halo h1"></div><div class="halo h2"></div><div class="rays"></div><div class="dove">🕊️</div>
+      </div>
+    </section>
+
+    <section class="shell" id="mensagem">
+      <article class="card daily reveal">
+        <span class="big-icon">☀️</span>
+        <p class="eyebrow">Mensagem do dia</p>
+        <h2>Uma palavra para o seu coração</h2>
+        <blockquote id="dailyMessage"></blockquote>
+        <p class="note">Uma nova mensagem aparece automaticamente a cada dia.</p>
+        <div class="affirmation"><span>Afirmação de hoje</span><strong id="dailyAffirmation"></strong></div>
+      </article>
+    </section>
+
+    <section class="shell grid">
+      <article class="card reveal">
+        <div class="heading"><span>🙏</span><div><p class="eyebrow">Momento de oração</p><h2>Prece para hoje</h2></div></div>
+        <p class="reading" id="prayerOfDay"></p>
+        <div class="actions">
+          <button class="btn primary" id="timerButton">1 minuto de silêncio</button>
+          <button class="btn soft" id="newPrayerButton">Outra prece</button>
+        </div>
+        <div class="timer-panel" id="timerPanel" hidden>
+          <div class="timer-ring" id="timerRing"><span id="timerDisplay">01:00</span></div>
+          <p id="timerStatus">Respire devagar e entregue suas preocupações.</p>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <div class="heading"><span>📖</span><div><p class="eyebrow">Leitura espírita</p><h2>Reflexão para hoje</h2></div></div>
+        <blockquote class="compact" id="spiritQuote"></blockquote>
+        <p class="source" id="spiritSource"></p>
+        <p id="spiritReflection"></p>
+        <button class="btn soft" id="newReflectionButton">Ler outra reflexão</button>
+      </article>
+    </section>
+
+    <section class="shell">
+      <article class="card love reveal">
+        <div class="heart-bg">♡</div>
+        <div class="heading"><span>💌</span><div><p class="eyebrow">Do seu filho para você</p><h2>Caixinha de carinho</h2></div></div>
+        <p class="son-message" id="sonMessage"></p>
+        <div class="actions"><button class="btn primary" id="nextSonMessage">Abrir outra mensagem</button><span class="counter" id="messageCounter"></span></div>
+      </article>
+    </section>
+
+    <section class="shell grid">
+      <article class="card reveal">
+        <div class="heading"><span>🌿</span><div><p class="eyebrow">Caderno pessoal</p><h2>Minha gratidão</h2></div></div>
+        <p>Registre três bênçãos deste dia. Elas ficam salvas somente neste aparelho.</p>
+        <div class="fields">
+          <input id="gratitude1" maxlength="160" placeholder="Hoje agradeço por...">
+          <input id="gratitude2" maxlength="160" placeholder="Também agradeço por...">
+          <input id="gratitude3" maxlength="160" placeholder="E agradeço por...">
+        </div>
+        <button class="btn primary" id="saveGratitude">Guardar minha gratidão</button>
+        <p class="status" id="gratitudeStatus"></p>
+      </article>
+
+      <article class="card reveal">
+        <div class="heading"><span>✨</span><div><p class="eyebrow">Entregar e confiar</p><h2>Intenção de oração</h2></div></div>
+        <p>Escreva algo que deseja entregar em prece hoje.</p>
+        <textarea id="prayerIntention" rows="8" maxlength="600" placeholder="Senhor, hoje entrego em Tuas mãos..."></textarea>
+        <div class="actions">
+          <button class="btn primary" id="saveIntention">Guardar intenção</button>
+          <button class="btn text" id="clearIntention">Apagar</button>
+        </div>
+        <p class="status" id="intentionStatus"></p>
+      </article>
+    </section>
+
+    <section class="shell">
+      <article class="card breathing reveal">
+        <div>
+          <span class="big-icon">☁️</span><p class="eyebrow">Pausa de serenidade</p><h2>Respirar, acalmar e confiar</h2>
+          <p>Acompanhe o círculo. Inspire devagar, segure suavemente e solte o ar sem pressa.</p>
+          <button class="btn soft" id="breathingToggle">Pausar animação</button>
+        </div>
+        <div class="breathing-stage">
+          <div class="ripple r1"></div><div class="ripple r2"></div>
+          <div class="breathing-circle"><span id="breathingText">Inspire</span></div>
+        </div>
+      </article>
+    </section>
+
+    <section class="shell mini-grid">
+      <article class="mini reveal"><span>🌅</span><h3>Recomeçar</h3><p>Todo amanhecer oferece uma nova oportunidade de fazer o bem.</p></article>
+      <article class="mini reveal"><span>🤍</span><h3>Perdoar</h3><p>Perdoar é libertar o coração do peso que já não precisa carregar.</p></article>
+      <article class="mini reveal"><span>🌱</span><h3>Evoluir</h3><p>Cada escolha amorosa é um pequeno passo na caminhada espiritual.</p></article>
+      <article class="mini reveal"><span>🫶</span><h3>Fazer o bem</h3><p>A caridade começa nas atitudes simples do cotidiano.</p></article>
+    </section>
+
+    <section class="shell">
+      <article class="closing reveal">
+        <span>✦</span>
+        <blockquote>“A verdadeira felicidade nasce da paz na consciência e do bem que fazemos.”</blockquote>
+        <p>Ivone, que este cantinho sempre lembre você de que é profundamente amada, importante e nunca está sozinha.</p>
+        <strong>Com todo o amor, Thomas.</strong>
+      </article>
+    </section>
+  </main>
+
+  <dialog id="prayerDialog">
+    <button class="dialog-close" id="closeDialog" aria-label="Fechar">×</button>
+    <span class="big-icon">🙏</span>
+    <h2>Uma prece para este momento</h2>
+    <p class="reading" id="quickPrayerText"></p>
+    <button class="btn primary" id="amenButton">Assim seja</button>
+  </dialog>
+
+  <div class="toast" id="toast"></div>
+  <footer><p>Cantinho da Ivone • Feito com amor por Thomas Rangel Bugs.</p><small>Um espaço pessoal de fé, esperança e serenidade.</small></footer>
+  <script src="script.js"></script>
+</body>
+</html>
