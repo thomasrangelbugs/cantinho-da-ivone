@@ -1,6 +1,6 @@
-# Cantinho da Ivone — versão completa
+# Cantinho da Ivone e do Osvaldo — versão completa
 
-Site pessoal e responsivo criado especialmente para **Ivone da Rosa Ferreira**.
+Site pessoal e responsivo criado especialmente para **Ivone e Osvaldo**, pais do Thomas.
 
 ## Publicar no Netlify
 

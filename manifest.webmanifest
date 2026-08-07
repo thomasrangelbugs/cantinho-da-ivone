@@ -1,7 +1,7 @@
 {
-  "name": "Cantinho da Ivone",
-  "short_name": "Ivone",
-  "description": "Um espaço pessoal de oração, esperança e serenidade para Ivone da Rosa Ferreira.",
+  "name": "Cantinho da Ivone e do Osvaldo",
+  "short_name": "Cantinho",
+  "description": "Um espaço pessoal de oração, esperança e serenidade para Ivone e Osvaldo.",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#f5f3ea",

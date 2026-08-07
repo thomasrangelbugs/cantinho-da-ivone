@@ -75,88 +75,376 @@ const sonMessages=[
 "Que os bons espíritos protejam seus passos e que você sempre se lembre de quanto é amada. Com amor, Thomas."
 ];
 
+const familyBirthdays=[
+  {
+    name:"Ivone",
+    day:19,
+    month:7,
+    eyebrow:"Aniversário da mamãe",
+    title:"Feliz aniversário, Ivone",
+    text:"Hoje o mundo ganhou você — e Thomas, Nicolas e Chris ganhamos a melhor mãe do mundo. Obrigado por tanto amor. Que este novo ciclo venha com saúde, paz e muito carinho. Com todo o meu amor, Thomas."
+  },
+  {
+    name:"Osvaldo",
+    day:27,
+    month:6,
+    eyebrow:"Aniversário do papai",
+    title:"Feliz aniversário, Osvaldo",
+    text:"Hoje celebramos o papai. Thomas, Nicolas e Chris somos gratos por você. Que Deus abençoe os seus dias com saúde, paz e a alegria da nossa família reunida. Com carinho, Thomas."
+  },
+  {
+    name:"Chris",
+    day:12,
+    month:5,
+    eyebrow:"Aniversário do Chris",
+    title:"Feliz aniversário, Chris",
+    text:"Hoje é o aniversário do Chris — filho da Ivone e do Osvaldo, irmão do Thomas e do Nicolas. Que este dia seja leve, abençoado e cheio de coisas boas. Com carinho da família."
+  },
+  {
+    name:"Nicolas",
+    day:17,
+    month:9,
+    eyebrow:"Aniversário do Nicolas",
+    title:"Feliz aniversário, Nicolas",
+    text:"Hoje é o aniversário do Nicolas — filho da Ivone e do Osvaldo, irmão do Thomas e do Chris. Que a vida traga a ele proteção, alegria e muitos motivos para sorrir. Com carinho da família."
+  },
+  {
+    name:"Thomas",
+    day:13,
+    month:1,
+    eyebrow:"Aniversário do Thomas",
+    title:"Feliz aniversário, Thomas",
+    text:"Hoje é o aniversário do Thomas — filho da Ivone e do Osvaldo, irmão do Chris e do Nicolas. Mãe, obrigado por me dar a vida e tanto amor. Este cantinho continua sendo um abraço meu para você."
+  }
+];
+
 const $=id=>document.getElementById(id);
 const now=new Date(),dayKey=now.toISOString().slice(0,10);
 const day=Math.floor((now-new Date(now.getFullYear(),0,0))/86400000);
 let prayerIndex=day%prayers.length,reflectionIndex=day%spiritReadings.length,sonIndex=day%sonMessages.length;
+const completedSteps=new Set();
+let sleepMode=false;
+let themeBeforeSleep=null;
 
 function toast(msg){$("toast").textContent=msg;$("toast").classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>$("toast").classList.remove("show"),2600)}
 function greeting(){const h=new Date().getHours();return h<12?"Bom dia":h<18?"Boa tarde":"Boa noite"}
 function renderPrayer(){$("prayerOfDay").textContent=prayers[prayerIndex];$("quickPrayerText").textContent=prayers[prayerIndex]}
 function renderReflection(){const r=spiritReadings[reflectionIndex];$("spiritQuote").textContent=`“${r.quote}”`;$("spiritSource").textContent=r.source;$("spiritReflection").textContent=r.reflection}
-function renderSon(){$("sonMessage").textContent=sonMessages[sonIndex];$("messageCounter").textContent=`${sonIndex+1} de ${sonMessages.length}`}
+function renderSon(){
+  const msg=sonMessages[sonIndex];
+  $("sonMessage").textContent=msg;
+  $("nightSonMessage").textContent=msg;
+  $("messageCounter").textContent=`${sonIndex+1} de ${sonMessages.length}`;
+}
 
-$("personalGreeting").textContent=`${greeting()}, Ivone.`;
+function mothersDayDate(year){
+  const first=new Date(year,4,1);
+  const sundayOffset=(7-first.getDay())%7;
+  return new Date(year,4,1+sundayOffset+7);
+}
+
+function fathersDayDate(year){
+  const first=new Date(year,7,1);
+  const sundayOffset=(7-first.getDay())%7;
+  return new Date(year,7,1+sundayOffset+7);
+}
+
+function showSpecialDay(){
+  const banner=$("birthdayBanner");
+  const todayBirthday=familyBirthdays.find(p=>now.getDate()===p.day&&(now.getMonth()+1)===p.month);
+  const mothers=mothersDayDate(now.getFullYear());
+  const fathers=fathersDayDate(now.getFullYear());
+  const isMothersDay=now.getDate()===mothers.getDate()&&now.getMonth()===mothers.getMonth();
+  const isFathersDay=now.getDate()===fathers.getDate()&&now.getMonth()===fathers.getMonth();
+
+  if(todayBirthday){
+    banner.hidden=false;
+    $("specialDayEyebrow").textContent=todayBirthday.eyebrow;
+    $("specialDayTitle").textContent=todayBirthday.title;
+    $("specialDayText").textContent=todayBirthday.text;
+  }else if(isMothersDay){
+    banner.hidden=false;
+    $("specialDayEyebrow").textContent="Dia das Mães";
+    $("specialDayTitle").textContent="Feliz Dia das Mães";
+    $("specialDayText").textContent="Thomas, Nicolas e Chris agradecemos por cada oração, cada cuidado e cada gesto de amor. Você é nosso porto seguro. Com gratidão e carinho, Thomas.";
+  }else if(isFathersDay){
+    banner.hidden=false;
+    $("specialDayEyebrow").textContent="Dia dos Pais";
+    $("specialDayTitle").textContent="Feliz Dia dos Pais, Osvaldo";
+    $("specialDayText").textContent="Hoje Thomas, Nicolas e Chris agradecemos ao papai por tanto cuidado e presença. Que Deus continue abençoando os seus caminhos. Com carinho, Thomas.";
+  }
+}
+
+$("personalGreeting").textContent=`${greeting()}, Ivone e Osvaldo.`;
 $("todayDate").textContent=new Intl.DateTimeFormat("pt-BR",{weekday:"long",day:"numeric",month:"long",year:"numeric"}).format(now);
 $("dailyMessage").textContent=dailyMessages[day%dailyMessages.length];
 $("dailyAffirmation").textContent=affirmations[day%affirmations.length];
 renderPrayer();renderReflection();
 const savedSon=Number(localStorage.getItem("ivone-son-index"));if(Number.isFinite(savedSon))sonIndex=savedSon%sonMessages.length;renderSon();
+showSpecialDay();
+
+(()=>{
+  const photo=$("lovePhoto");
+  const real=new Image();
+  real.onload=()=>{photo.src="assets/foto-carinho.jpg";photo.alt="Ivone, Osvaldo e Thomas"};
+  real.src="assets/foto-carinho.jpg";
+})();
 
 $("newPrayerButton").onclick=()=>{prayerIndex=(prayerIndex+1)%prayers.length;renderPrayer()};
 $("newReflectionButton").onclick=()=>{reflectionIndex=(reflectionIndex+1)%spiritReadings.length;renderReflection()};
-$("nextSonMessage").onclick=()=>{sonIndex=(sonIndex+1)%sonMessages.length;localStorage.setItem("ivone-son-index",sonIndex);renderSon()};
+const nextSon=()=>{sonIndex=(sonIndex+1)%sonMessages.length;localStorage.setItem("ivone-son-index",sonIndex);renderSon()};
+$("nextSonMessage").onclick=nextSon;
+$("nightNextSon").onclick=nextSon;
 
 const savedTheme=localStorage.getItem("ivone-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");
 document.documentElement.dataset.theme=savedTheme;$("themeToggle").textContent=savedTheme==="dark"?"☀":"☾";
-$("themeToggle").onclick=()=>{const next=document.documentElement.dataset.theme==="dark"?"light":"dark";document.documentElement.dataset.theme=next;localStorage.setItem("ivone-theme",next);$("themeToggle").textContent=next==="dark"?"☀":"☾"};
+$("themeToggle").onclick=()=>{
+  if(sleepMode)return;
+  const next=document.documentElement.dataset.theme==="dark"?"light":"dark";
+  document.documentElement.dataset.theme=next;
+  localStorage.setItem("ivone-theme",next);
+  $("themeToggle").textContent=next==="dark"?"☀":"☾";
+};
 
-const backgroundMusic = new Audio("assets/luz_serena.mp3");
-backgroundMusic.loop = true;
-backgroundMusic.preload = "auto";
-backgroundMusic.volume = 0;
-let sound = false;
-let volumeTimer = null;
-
-function fadeMusic(targetVolume, duration = 1200) {
-  clearInterval(volumeTimer);
-  const initial = backgroundMusic.volume;
-  const steps = 30;
-  let step = 0;
-  volumeTimer = setInterval(() => {
-    step += 1;
-    backgroundMusic.volume = Math.max(0, Math.min(1, initial + (targetVolume - initial) * (step / steps)));
-    if (step >= steps) {
-      clearInterval(volumeTimer);
-      volumeTimer = null;
-      if (targetVolume === 0) backgroundMusic.pause();
-    }
-  }, duration / steps);
+function openStep(step){
+  document.querySelectorAll(".night-step").forEach(el=>{
+    el.classList.toggle("is-open",Number(el.dataset.step)===step);
+  });
 }
 
-$("soundToggle").onclick = async () => {
-  if (sound) {
-    sound = false;
-    fadeMusic(0, 900);
-    $("soundToggle").textContent = "♫";
-    $("soundToggle").title = "Tocar música";
+function updateNightFinish(){
+  const done=completedSteps.size>=3;
+  $("nightFinish").hidden=!done;
+}
+
+function completeStep(step){
+  completedSteps.add(step);
+  const el=document.querySelector(`.night-step[data-step="${step}"]`);
+  if(el)el.classList.add("is-done");
+  updateNightFinish();
+  const next=step+1;
+  if(next<=3)openStep(next);
+  toast(step===3?"Rotina concluída. Descanse com paz.":`Passo ${step} concluído.`);
+}
+
+document.querySelectorAll("[data-open-step]").forEach(btn=>{
+  btn.onclick=()=>openStep(Number(btn.dataset.openStep));
+});
+document.querySelectorAll("[data-complete-step]").forEach(btn=>{
+  btn.onclick=()=>completeStep(Number(btn.dataset.completeStep));
+});
+
+function enterSleepMode(){
+  if(sleepMode)return;
+  sleepMode=true;
+  themeBeforeSleep=document.documentElement.dataset.theme||"light";
+  document.documentElement.dataset.theme="dark";
+  document.body.classList.add("sleep-mode");
+  $("sleepBar").hidden=false;
+  $("sleepToggle").classList.add("is-active");
+  $("sleepToggle").title="Sair do modo dormir";
+  openStep(1);
+  $("rotina-noturna").scrollIntoView({behavior:"smooth",block:"start"});
+  toast("Modo dormir ativado.");
+}
+
+function exitSleepMode(){
+  if(!sleepMode)return;
+  sleepMode=false;
+  document.body.classList.remove("sleep-mode");
+  $("sleepBar").hidden=true;
+  $("sleepToggle").classList.remove("is-active");
+  $("sleepToggle").title="Modo dormir";
+  document.documentElement.dataset.theme=themeBeforeSleep||localStorage.getItem("ivone-theme")||"light";
+  $("themeToggle").textContent=document.documentElement.dataset.theme==="dark"?"☀":"☾";
+  toast("Modo dormir encerrado.");
+}
+
+$("sleepToggle").onclick=()=>{sleepMode?exitSleepMode():enterSleepMode()};
+$("exitSleep").onclick=exitSleepMode;
+$("startNightButton").onclick=()=>{
+  enterSleepMode();
+};
+
+const backgroundMusic=new Audio("assets/luz_serena.mp3");
+backgroundMusic.loop=true;
+backgroundMusic.preload="auto";
+backgroundMusic.volume=0;
+let sound=false;
+let volumeTimer=null;
+
+const miguelAudio=new Audio("assets/oracao_arcanjo_miguel.mp3");
+miguelAudio.preload="metadata";
+miguelAudio.volume=0.85;
+let miguelPlaying=false;
+
+function formatTime(sec){
+  if(!Number.isFinite(sec)||sec<0)return"--:--";
+  const m=Math.floor(sec/60);
+  const s=Math.floor(sec%60);
+  return`${m}:${String(s).padStart(2,"0")}`;
+}
+
+function setMiguelProgress(){
+  const seek=$("miguelSeek");
+  const duration=miguelAudio.duration||0;
+  const current=miguelAudio.currentTime||0;
+  const pct=duration?(current/duration)*100:0;
+  seek.value=String(pct);
+  seek.style.setProperty("--fill",`${pct}%`);
+  $("miguelCurrent").textContent=formatTime(current);
+  if(duration)$("miguelDuration").textContent=formatTime(duration);
+}
+
+function setMiguelPlayingUI(playing){
+  miguelPlaying=playing;
+  const btn=$("miguelPlay");
+  btn.textContent=playing?"❚❚":"▶";
+  btn.classList.toggle("is-playing",playing);
+  btn.setAttribute("aria-label",playing?"Pausar oração do Arcanjo Miguel":"Tocar oração do Arcanjo Miguel");
+  btn.title=playing?"Pausar":"Tocar";
+}
+
+function pauseAmbientMusic(){
+  if(!sound)return;
+  sound=false;
+  fadeMusic(0,700);
+  $("soundToggle").textContent="♫";
+  $("soundToggle").title="Tocar música";
+}
+
+function pauseMiguelPrayer(){
+  if(!miguelPlaying&&miguelAudio.paused)return;
+  miguelAudio.pause();
+  setMiguelPlayingUI(false);
+}
+
+function fadeMusic(targetVolume,duration=1200){
+  clearInterval(volumeTimer);
+  const initial=backgroundMusic.volume;
+  const steps=30;
+  let step=0;
+  volumeTimer=setInterval(()=>{
+    step+=1;
+    backgroundMusic.volume=Math.max(0,Math.min(1,initial+(targetVolume-initial)*(step/steps)));
+    if(step>=steps){
+      clearInterval(volumeTimer);
+      volumeTimer=null;
+      if(targetVolume===0)backgroundMusic.pause();
+    }
+  },duration/steps);
+}
+
+$("soundToggle").onclick=async()=>{
+  if(sound){
+    sound=false;
+    fadeMusic(0,900);
+    $("soundToggle").textContent="♫";
+    $("soundToggle").title="Tocar música";
     toast("Música pausada.");
     return;
   }
-
-  try {
+  try{
+    pauseMiguelPrayer();
     await backgroundMusic.play();
-    sound = true;
-    fadeMusic(0.42, 1300);
-    $("soundToggle").textContent = "♬";
-    $("soundToggle").title = "Pausar música";
+    sound=true;
+    fadeMusic(0.42,1300);
+    $("soundToggle").textContent="♬";
+    $("soundToggle").title="Pausar música";
     toast("Tocando “Luz Serena”.");
-  } catch {
+  }catch{
     toast("Toque novamente no botão para iniciar a música.");
   }
 };
 
-document.addEventListener("visibilitychange", () => {
-  if (document.hidden && sound) {
-    backgroundMusic.pause();
-  } else if (!document.hidden && sound) {
-    backgroundMusic.play().catch(() => {});
+$("miguelPlay").onclick=async()=>{
+  if(miguelPlaying){
+    pauseMiguelPrayer();
+    toast("Oração pausada.");
+    return;
   }
+  try{
+    pauseAmbientMusic();
+    await miguelAudio.play();
+    setMiguelPlayingUI(true);
+    openStep(1);
+    toast("Oração do Arcanjo Miguel.");
+  }catch{
+    toast("Toque novamente no botão para iniciar a oração.");
+  }
+};
+
+$("miguelSeek").oninput=()=>{
+  const duration=miguelAudio.duration||0;
+  if(!duration)return;
+  const pct=Number($("miguelSeek").value);
+  miguelAudio.currentTime=(pct/100)*duration;
+  $("miguelSeek").style.setProperty("--fill",`${pct}%`);
+  $("miguelCurrent").textContent=formatTime(miguelAudio.currentTime);
+};
+
+miguelAudio.addEventListener("loadedmetadata",setMiguelProgress);
+miguelAudio.addEventListener("timeupdate",setMiguelProgress);
+miguelAudio.addEventListener("ended",()=>{
+  setMiguelPlayingUI(false);
+  miguelAudio.currentTime=0;
+  setMiguelProgress();
+  if(!completedSteps.has(1))completeStep(1);
+  else toast("Que o Arcanjo Miguel guarde o seu sono.");
+});
+miguelAudio.addEventListener("pause",()=>{if(!miguelAudio.ended)setMiguelPlayingUI(false)});
+miguelAudio.addEventListener("play",()=>setMiguelPlayingUI(true));
+
+document.addEventListener("visibilitychange",()=>{
+  if(document.hidden&&sound)backgroundMusic.pause();
+  else if(!document.hidden&&sound)backgroundMusic.play().catch(()=>{});
 });
 
 let timer=null,seconds=60;
-function timerUI(){$("timerDisplay").textContent=`00:${String(seconds).padStart(2,"0")}`;$("timerRing").style.setProperty("--progress",`${((60-seconds)/60)*360}deg`)}
-$("timerButton").onclick=()=>{if(timer)return;$("timerPanel").hidden=false;seconds=60;timerUI();timer=setInterval(()=>{seconds--;timerUI();if(seconds<=0){clearInterval(timer);timer=null;$("timerStatus").textContent="Que este momento tenha trazido paz e serenidade ao seu coração.";$("timerButton").textContent="Recomeçar 1 minuto";toast("Seu minuto de silêncio foi concluído.")}},1000)};
+function timerUI(){
+  $("timerDisplay").textContent=`00:${String(seconds).padStart(2,"0")}`;
+  $("timerRing").style.setProperty("--progress",`${((60-seconds)/60)*360}deg`);
+}
+$("timerButton").onclick=()=>{
+  if(timer)return;
+  $("timerPanel").hidden=false;
+  seconds=60;
+  timerUI();
+  timer=setInterval(()=>{
+    seconds--;
+    timerUI();
+    if(seconds<=0){
+      clearInterval(timer);timer=null;
+      $("timerStatus").textContent="Que este momento tenha trazido paz e serenidade ao seu coração.";
+      $("timerButton").textContent="Recomeçar 1 minuto";
+      toast("Seu minuto de silêncio foi concluído.");
+    }
+  },1000);
+};
+
+let nightTimer=null,nightSeconds=60;
+function nightTimerUI(){
+  $("nightTimerDisplay").textContent=`00:${String(nightSeconds).padStart(2,"0")}`;
+  $("nightTimerRing").style.setProperty("--progress",`${((60-nightSeconds)/60)*360}deg`);
+}
+$("nightTimerButton").onclick=()=>{
+  if(nightTimer)return;
+  nightSeconds=60;
+  nightTimerUI();
+  $("nightTimerStatus").textContent="Respire sem pressa.";
+  $("nightTimerButton").textContent="Respirando...";
+  nightTimer=setInterval(()=>{
+    nightSeconds--;
+    nightTimerUI();
+    if(nightSeconds<=0){
+      clearInterval(nightTimer);nightTimer=null;
+      $("nightTimerStatus").textContent="Que este minuto tenha acalmado o seu coração.";
+      $("nightTimerButton").textContent="Recomeçar 1 minuto";
+      if(!completedSteps.has(2))completeStep(2);
+      else toast("Minuto de respiração concluído.");
+    }
+  },1000);
+};
 
 const gratitudeIds=["gratitude1","gratitude2","gratitude3"],gratitudeKey=`ivone-gratitude-${dayKey}`,intentionKey=`ivone-intention-${dayKey}`;
 try{const saved=JSON.parse(localStorage.getItem(gratitudeKey)||"[]");gratitudeIds.forEach((id,i)=>$(id).value=saved[i]||"")}catch{}
@@ -166,15 +454,38 @@ $("saveIntention").onclick=()=>{localStorage.setItem(intentionKey,$("prayerInten
 $("clearIntention").onclick=()=>{$("prayerIntention").value="";localStorage.removeItem(intentionKey);$("intentionStatus").textContent="A intenção foi apagada."};
 
 let paused=false,phaseTimers=[];
-function breathing(){if(paused)return;phaseTimers.forEach(clearTimeout);$("breathingText").textContent="Inspire";phaseTimers=[setTimeout(()=>$("breathingText").textContent="Segure",4000),setTimeout(()=>$("breathingText").textContent="Expire",5800)]}
+function setBreathTexts(inspire){
+  $("breathingText").textContent=inspire;
+  $("nightBreathingText").textContent=inspire;
+}
+function breathing(){
+  if(paused)return;
+  phaseTimers.forEach(clearTimeout);
+  setBreathTexts("Inspire");
+  phaseTimers=[
+    setTimeout(()=>setBreathTexts("Segure"),4000),
+    setTimeout(()=>setBreathTexts("Expire"),5800)
+  ];
+}
 breathing();setInterval(breathing,10000);
-$("breathingToggle").onclick=()=>{paused=!paused;document.querySelector(".breathing-stage").classList.toggle("paused",paused);$("breathingToggle").textContent=paused?"Continuar animação":"Pausar animação";$("breathingText").textContent=paused?"Pausa":"Inspire";if(!paused)breathing()};
+$("breathingToggle").onclick=()=>{
+  paused=!paused;
+  document.querySelectorAll(".breathing-stage").forEach(el=>el.classList.toggle("paused",paused));
+  $("breathingToggle").textContent=paused?"Continuar animação":"Pausar animação";
+  setBreathTexts(paused?"Pausa":"Inspire");
+  if(!paused)breathing();
+};
 
 const dialog=$("prayerDialog");
 $("quickPrayerButton").onclick=()=>{renderPrayer();dialog.showModal()};
-$("closeDialog").onclick=()=>dialog.close();$("amenButton").onclick=()=>dialog.close();
+$("closeDialog").onclick=()=>dialog.close();
+$("amenButton").onclick=()=>dialog.close();
 
-const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("visible");observer.unobserve(e.target)}}),{threshold:.12});
+const observer=new IntersectionObserver(entries=>entries.forEach(e=>{
+  if(e.isIntersecting){e.target.classList.add("visible");observer.unobserve(e.target)}
+}),{threshold:.12});
 document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
 
-if("serviceWorker"in navigator&&location.protocol.startsWith("http"))addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+if("serviceWorker"in navigator&&location.protocol.startsWith("http")){
+  addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+}

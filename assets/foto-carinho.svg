@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Ivone e Thomas">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e8d7b8"/>
+      <stop offset="55%" stop-color="#c9d7c4"/>
+      <stop offset="100%" stop-color="#d7b8b8"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#g)"/>
+  <circle cx="200" cy="200" r="118" fill="none" stroke="rgba(63,91,70,.28)" stroke-width="2"/>
+  <circle cx="200" cy="200" r="96" fill="rgba(255,255,255,.35)"/>
+  <text x="200" y="188" text-anchor="middle" font-family="Georgia, serif" font-size="54" fill="#3f5b46">I a T</text>
+  <text x="200" y="232" text-anchor="middle" font-family="Georgia, serif" font-size="18" fill="#6f7872">com amor</text>
+</svg>
