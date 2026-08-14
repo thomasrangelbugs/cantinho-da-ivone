@@ -2,6 +2,33 @@
 
 Site pessoal e responsivo criado especialmente para **Ivone e Osvaldo**, pais do Thomas.
 
+## Como usar
+
+Abra `index.html` no navegador ou sirva a pasta:
+
+```powershell
+python -m http.server 8080
+```
+
+No celular, instale como PWA. Há saudação por horário, mensagens do dia, preces, modo dormir, tema claro/noturno e áudio (oração / Luz Serena). Dados pessoais ficam só no aparelho.
+
+## Linguagem e tecnologias
+
+- **HTML5 / CSS3 / JavaScript**
+- **PWA** — `manifest.webmanifest` + `sw.js`
+
+## Estrutura do projeto
+
+```
+cantinho-da-ivone/
+├── index.html
+├── style.css
+├── script.js
+├── manifest.webmanifest
+├── sw.js
+└── assets/          # imagens, ícones e áudio
+```
+
 ## Publicar no Netlify
 
 1. Extraia o ZIP.
