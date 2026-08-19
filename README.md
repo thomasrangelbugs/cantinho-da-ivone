@@ -1,4 +1,4 @@
-# Cantinho da Ivone e do Osvaldo — versão completa
+﻿# Cantinho da Ivone e do Osvaldo — versão completa
 
 Site pessoal e responsivo criado especialmente para **Ivone e Osvaldo**, pais do Thomas.
 
@@ -29,6 +29,11 @@ cantinho-da-ivone/
 └── assets/          # imagens, ícones e áudio
 ```
 
+
+## Requisitos
+
+- Navegador moderno (Chrome, Edge, Firefox ou Safari atualizado)
+- Conexão com a internet apenas para recursos externos integrados, quando aplicável
 ## Publicar no Netlify
 
 1. Extraia o ZIP.
@@ -69,3 +74,7 @@ criada especialmente para este site. Ela possui melodia, acordes, piano suave e 
 é reproduzida em loop e funciona offline.
 
 Por regra dos navegadores, a música começa somente depois que a pessoa toca no botão ♫.
+
+## Autor
+
+**Thomas Rangel Bugs** — [github.com/thomasrangelbugs](https://github.com/thomasrangelbugs)
