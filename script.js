@@ -1,56 +1,19 @@
-const dailyMessages=[
-"Que o seu coração encontre hoje a calma necessária para perceber que cada amanhecer é uma nova oportunidade.",
-"A fé não elimina todos os caminhos difíceis, mas acende uma luz para que possamos atravessá-los.",
-"Faça o bem que estiver ao seu alcance. Muitas vezes, uma pequena gentileza transforma um dia inteiro.",
-"A serenidade cresce quando confiamos que cada experiência pode ensinar algo à nossa alma.",
-"Não carregue hoje o peso de todos os dias. Viva este momento com esperança e confiança.",
-"A paz começa dentro de nós quando escolhemos pensamentos mais suaves e atitudes mais amorosas.",
-"Mesmo nos dias silenciosos, a vida continua preparando novos encontros, aprendizados e alegrias.",
-"Cada gesto de carinho é uma semente de luz plantada no caminho de alguém.",
-"Você não precisa ter todas as respostas. Basta seguir com fé, bondade e um passo de cada vez.",
-"A esperança é a voz tranquila da alma lembrando que nenhuma noite dura para sempre.",
-"Perdoar não muda o passado, mas pode devolver leveza ao presente.",
-"O amor que oferecemos sempre encontra uma forma de permanecer no mundo.",
-"Cuide dos seus pensamentos como quem cuida de um jardim: retire o que machuca e regue o que traz paz.",
-"A espiritualidade também vive nas coisas simples: uma palavra gentil, um abraço sincero e uma prece feita com amor.",
-"Confie no tempo, mas faça hoje tudo o que estiver ao seu alcance para espalhar o bem.",
-"A verdadeira força é continuar cultivando ternura, mesmo depois de dias difíceis.",
-"Que a sua casa seja hoje um lugar de paz e que seu coração seja um abrigo de esperança.",
-"Você faz parte de uma história maior, construída com aprendizados, reencontros e oportunidades de evolução.",
-"A gratidão transforma o que temos em suficiente e abre os olhos para bênçãos antes despercebidas.",
-"Não compare o seu caminho. Cada alma possui seu próprio tempo de florescer.",
-"Onde houver dúvida, escolha a bondade. Onde houver medo, faça uma prece.",
-"A vida sempre oferece uma nova página. Escreva a de hoje com fé e serenidade.",
-"Toda dificuldade pode ser atravessada com mais leveza quando caminhamos também com esperança.",
-"Que seus pensamentos encontrem repouso e sua alma se lembre do quanto é amada.",
-"Ser paciente consigo mesma também é uma forma de caridade.",
-"A luz que você oferece aos outros também ilumina o seu próprio caminho.",
-"Nenhum esforço sincero para ser melhor é pequeno.",
-"A prece é uma conversa da alma: não precisa ser perfeita, apenas verdadeira.",
-"O dia de hoje não precisa ser extraordinário para ser precioso.",
-"Que você reconheça, nas pequenas alegrias, a presença delicada do amor divino.",
-"A cada manhã, a vida nos convida novamente a aprender, amar, perdoar e recomeçar."
-];
-
-const affirmations=[
-"Eu acolho este dia com serenidade e confiança.",
-"Sou amada, protegida e capaz de recomeçar.",
-"Escolho alimentar pensamentos de paz.",
-"Minha fé é maior do que as inquietações deste momento.",
-"Posso caminhar devagar, sem deixar de seguir em frente.",
-"O bem que faço também floresce dentro de mim.",
-"Eu mereço descansar e receber carinho.",
-"Confio que cada dia traz uma nova possibilidade.",
-"Minha presença é importante para as pessoas que me amam.",
-"Hoje escolho tratar a mim mesma com gentileza."
-];
+const CONTENT = window.CANTINHO_CONTENT || {
+  greetings:{morning:{ivone:[],osvaldo:[]},afternoon:{ivone:[],osvaldo:[]},evening:{ivone:[],osvaldo:[]}},
+  dailyMessages:["Que a paz de Deus acompanhe Ivone e Osvaldo hoje."],
+  affirmations:["Acolhemos este dia com fé e carinho."],
+  bibleStories:[{title:"O Bom Samaritano",ref:"Lucas 10",story:"Ajudar quem precisa.",lesson:"Seja misericordioso."}],
+  diets:{},
+  weatherTips:{clear:{title:"Sol",tips:["Beba água."]}}
+};
 
 const prayers=[
 "Senhor, agradeço por este novo dia. Ilumina meus pensamentos, fortalece minha fé e ajuda-me a espalhar bondade, paciência e amor. Que eu encontre serenidade para aceitar o que não posso mudar, coragem para transformar o que estiver ao meu alcance e sabedoria para reconhecer cada oportunidade de fazer o bem. Assim seja.",
 "Deus de amor, visita hoje o meu coração. Leva para longe a inquietação, renova minhas forças e inspira minhas palavras e atitudes. Que eu seja instrumento de paz dentro da minha casa e por onde passar. Assim seja.",
 "Bons amigos espirituais, acompanhem meus passos neste dia. Ajudem-me a perceber as lições escondidas nas dificuldades e as bênçãos presentes nas coisas simples. Que eu siga com confiança, humildade e gratidão.",
 "Senhor, entrego em Tuas mãos aquilo que ainda não consigo resolver. Dá-me calma para viver um dia de cada vez e coragem para continuar fazendo a minha parte com amor. Que a esperança permaneça acesa dentro de mim.",
-"Pai de infinita bondade, abençoa minha família, minha casa e todos aqueles que precisam de consolo. Que nossas palavras sejam mais gentis, nossos pensamentos mais claros e nossas escolhas guiadas pelo bem."
+"Pai de infinita bondade, abençoa minha família, minha casa e todos aqueles que precisam de consolo. Que nossas palavras sejam mais gentis, nossos pensamentos mais claros e nossas escolhas guiadas pelo bem.",
+"Senhor, abençoa Ivone e Osvaldo. Guarda a saúde deles, fortalece a união da família e derrama paz sobre a casa em Venâncio Aires. Assim seja."
 ];
 
 const spiritReadings=[
@@ -63,78 +26,111 @@ const spiritReadings=[
 ];
 
 const sonMessages=[
-"Mãe, este cantinho foi feito para lembrar você de que sempre existe uma luz acesa, mesmo nos dias mais nublados. Eu amo você.",
-"Ivone, sua força, seu carinho e tudo o que você já fez por nossa família permanecem comigo todos os dias.",
-"Mãe, nunca se esqueça: sua presença faz diferença na minha vida. Você é muito importante para mim.",
-"Que você abra este site sempre que precisar de um pouco de calma e sinta, em cada palavra, um abraço meu.",
-"Obrigado por tantas vezes acreditar em mim. Este é um pequeno jeito de devolver um pouco de todo o amor que recebi de você.",
-"Você não precisa resolver tudo de uma vez. Descanse o coração, respire e lembre que tem um filho que ama muito você.",
-"Mãe, desejo que seus dias tenham mais serenidade, saúde, esperança e pequenos motivos para sorrir.",
-"Mesmo quando eu não disser em voz alta, quero que saiba: tenho orgulho de você e sou grato por ser seu filho.",
-"Este espaço é só seu, mas todo o amor colocado nele veio de nós dois: de tudo que você me ensinou e de tudo que sinto por você.",
-"Que os bons espíritos protejam seus passos e que você sempre se lembre de quanto é amada. Com amor, Thomas."
+"Mãe e pai, este cantinho foi feito para lembrar vocês de que sempre existe uma luz acesa. Eu amo vocês.",
+"Ivone e Osvaldo, sua força, seu carinho e tudo o que fizeram por nossa família permanecem comigo todos os dias.",
+"Nunca se esqueçam: a presença de vocês faz diferença na minha vida. Vocês são muito importantes para mim.",
+"Que vocês abram este site sempre que precisarem de calma e sintam, em cada palavra, um abraço meu.",
+"Obrigado por tantas vezes acreditarem em mim. Este é um pequeno jeito de devolver o amor que recebi de vocês.",
+"Vocês não precisam resolver tudo de uma vez. Descansem o coração e lembrem que têm um filho que ama muito vocês.",
+"Desejo que seus dias tenham mais serenidade, saúde, esperança e pequenos motivos para sorrir.",
+"Mesmo quando eu não disser em voz alta: tenho orgulho de vocês e sou grato por ser filho de Ivone e Osvaldo.",
+"Este espaço é de vocês dois — e todo o amor nele veio do que me ensinaram.",
+"Que os bons espíritos protejam seus passos. Com amor, Thomas.",
+"Pai Osvaldo, obrigado pelo exemplo e pelo cuidado. Mãe Ivone, obrigado pela fé e pelo carinho. Vocês são meu porto seguro.",
+"Chris, Nicolas e eu somos gratos por ter vocês como pais. Que Deus multiplique saúde e paz em casa."
 ];
 
 const familyBirthdays=[
-  {
-    name:"Ivone",
-    day:19,
-    month:7,
-    eyebrow:"Aniversário da mamãe",
-    title:"Feliz aniversário, Ivone",
-    text:"Hoje o mundo ganhou você — e Thomas, Nicolas e Chris ganhamos a melhor mãe do mundo. Obrigado por tanto amor. Que este novo ciclo venha com saúde, paz e muito carinho. Com todo o meu amor, Thomas."
-  },
-  {
-    name:"Osvaldo",
-    day:27,
-    month:6,
-    eyebrow:"Aniversário do papai",
-    title:"Feliz aniversário, Osvaldo",
-    text:"Hoje celebramos o papai. Thomas, Nicolas e Chris somos gratos por você. Que Deus abençoe os seus dias com saúde, paz e a alegria da nossa família reunida. Com carinho, Thomas."
-  },
-  {
-    name:"Chris",
-    day:12,
-    month:5,
-    eyebrow:"Aniversário do Chris",
-    title:"Feliz aniversário, Chris",
-    text:"Hoje é o aniversário do Chris — filho da Ivone e do Osvaldo, irmão do Thomas e do Nicolas. Que este dia seja leve, abençoado e cheio de coisas boas. Com carinho da família."
-  },
-  {
-    name:"Nicolas",
-    day:17,
-    month:9,
-    eyebrow:"Aniversário do Nicolas",
-    title:"Feliz aniversário, Nicolas",
-    text:"Hoje é o aniversário do Nicolas — filho da Ivone e do Osvaldo, irmão do Thomas e do Chris. Que a vida traga a ele proteção, alegria e muitos motivos para sorrir. Com carinho da família."
-  },
-  {
-    name:"Thomas",
-    day:13,
-    month:1,
-    eyebrow:"Aniversário do Thomas",
-    title:"Feliz aniversário, Thomas",
-    text:"Hoje é o aniversário do Thomas — filho da Ivone e do Osvaldo, irmão do Chris e do Nicolas. Mãe, obrigado por me dar a vida e tanto amor. Este cantinho continua sendo um abraço meu para você."
-  }
+  {name:"Ivone",day:19,month:7,eyebrow:"Aniversário da mamãe",title:"Feliz aniversário, Ivone",text:"Hoje o mundo ganhou você — e Thomas, Nicolas e Chris ganhamos a melhor mãe do mundo. Obrigado por tanto amor. Que este novo ciclo venha com saúde, paz e muito carinho. Com todo o meu amor, Thomas."},
+  {name:"Osvaldo",day:27,month:6,eyebrow:"Aniversário do papai",title:"Feliz aniversário, Osvaldo",text:"Hoje celebramos o papai. Thomas, Nicolas e Chris somos gratos por você. Que Deus abençoe os seus dias com saúde, paz e a alegria da nossa família reunida. Com carinho, Thomas."},
+  {name:"Chris",day:12,month:5,eyebrow:"Aniversário do Chris",title:"Feliz aniversário, Chris",text:"Hoje é o aniversário do Chris — filho da Ivone e do Osvaldo, irmão do Thomas e do Nicolas. Que este dia seja leve, abençoado e cheio de coisas boas. Com carinho da família."},
+  {name:"Nicolas",day:17,month:9,eyebrow:"Aniversário do Nicolas",title:"Feliz aniversário, Nicolas",text:"Hoje é o aniversário do Nicolas — filho da Ivone e do Osvaldo, irmão do Thomas e do Chris. Que a vida traga a ele proteção, alegria e muitos motivos para sorrir. Com carinho da família."},
+  {name:"Thomas",day:13,month:1,eyebrow:"Aniversário do Thomas",title:"Feliz aniversário, Thomas",text:"Hoje é o aniversário do Thomas — filho da Ivone e do Osvaldo, irmão do Chris e do Nicolas. Mãe e pai, obrigado por me darem a vida e tanto amor. Este cantinho continua sendo um abraço meu para vocês."}
 ];
 
 const $=id=>document.getElementById(id);
-const now=new Date(),dayKey=now.toISOString().slice(0,10);
+const now=new Date();
+const dayKey=now.toISOString().slice(0,10);
 const day=Math.floor((now-new Date(now.getFullYear(),0,0))/86400000);
-let prayerIndex=day%prayers.length,reflectionIndex=day%spiritReadings.length,sonIndex=day%sonMessages.length;
+let prayerIndex=day%prayers.length;
+let reflectionIndex=day%spiritReadings.length;
+let sonIndex=day%sonMessages.length;
+let bibleIndex=day%CONTENT.bibleStories.length;
+let parentMsgOffset=0;
 const completedSteps=new Set();
 let sleepMode=false;
 let themeBeforeSleep=null;
+let currentWeatherKey="cloudy";
+let lastCalcCategory="normal";
 
-function toast(msg){$("toast").textContent=msg;$("toast").classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>$("toast").classList.remove("show"),2600)}
-function greeting(){const h=new Date().getHours();return h<12?"Bom dia":h<18?"Boa tarde":"Boa noite"}
-function renderPrayer(){$("prayerOfDay").textContent=prayers[prayerIndex];$("quickPrayerText").textContent=prayers[prayerIndex]}
-function renderReflection(){const r=spiritReadings[reflectionIndex];$("spiritQuote").textContent=`“${r.quote}”`;$("spiritSource").textContent=r.source;$("spiritReflection").textContent=r.reflection}
+function toast(msg){
+  $("toast").textContent=msg;
+  $("toast").classList.add("show");
+  clearTimeout(toast.t);
+  toast.t=setTimeout(()=>$("toast").classList.remove("show"),2800);
+}
+
+function greeting(){
+  const h=new Date().getHours();
+  return h<12?"Bom dia":h<18?"Boa tarde":"Boa noite";
+}
+
+function periodKey(date=new Date()){
+  const h=date.getHours();
+  if(h<12)return"morning";
+  if(h<18)return"afternoon";
+  return"evening";
+}
+
+function periodMeta(){
+  const key=periodKey();
+  if(key==="morning")return{label:"Mensagens de bom dia",icon:"☀️",sky:"morning"};
+  if(key==="afternoon")return{label:"Mensagens de boa tarde",icon:"🌤️",sky:"afternoon"};
+  return{label:"Mensagens de boa noite",icon:"🌙",sky:"night"};
+}
+
+function pickFrom(list,offset=0){
+  if(!list||!list.length)return"";
+  return list[Math.abs(day+offset)%list.length];
+}
+
+function renderParentMessages(){
+  const key=periodKey();
+  const meta=periodMeta();
+  const ivoneList=CONTENT.greetings[key]?.ivone||[];
+  const osvaldoList=CONTENT.greetings[key]?.osvaldo||[];
+  $("periodLabel").textContent=meta.label;
+  $("periodIcon").textContent=meta.icon;
+  $("msgIvone").textContent=pickFrom(ivoneList,parentMsgOffset);
+  $("msgOsvaldo").textContent=pickFrom(osvaldoList,parentMsgOffset+17);
+  document.body.dataset.sky=meta.sky;
+}
+
+function renderPrayer(){
+  $("prayerOfDay").textContent=prayers[prayerIndex];
+  $("quickPrayerText").textContent=prayers[prayerIndex];
+}
+
+function renderReflection(){
+  const r=spiritReadings[reflectionIndex];
+  $("spiritQuote").textContent=`“${r.quote}”`;
+  $("spiritSource").textContent=r.source;
+  $("spiritReflection").textContent=r.reflection;
+}
+
 function renderSon(){
   const msg=sonMessages[sonIndex];
   $("sonMessage").textContent=msg;
   $("nightSonMessage").textContent=msg;
   $("messageCounter").textContent=`${sonIndex+1} de ${sonMessages.length}`;
+}
+
+function renderBible(){
+  const s=CONTENT.bibleStories[bibleIndex%CONTENT.bibleStories.length];
+  $("bibleTitle").textContent=s.title;
+  $("bibleRef").textContent=s.ref;
+  $("bibleStory").textContent=s.story;
+  $("bibleLesson").textContent=s.lesson;
 }
 
 function mothersDayDate(year){
@@ -175,13 +171,164 @@ function showSpecialDay(){
   }
 }
 
+function updateClock(){
+  const d=new Date();
+  $("liveClock").textContent=d.toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit",second:"2-digit"});
+  $("liveDate").textContent=new Intl.DateTimeFormat("pt-BR",{weekday:"long",day:"numeric",month:"long"}).format(d);
+  const prev=document.body.dataset.sky;
+  const next=periodMeta().sky;
+  if(prev!==next)renderParentMessages();
+}
+
+function mapWeather(code,temp,humidity,wind){
+  if(code>=95)return{key:"storm",label:"Temporal / trovoadas",icon:"⛈️"};
+  if(code>=80&&code<=82)return{key:"rain",label:"Pancadas de chuva",icon:"🌦️"};
+  if(code>=61&&code<=67)return{key:"rain",label:"Chuva",icon:"🌧️"};
+  if(code>=51&&code<=57)return{key:"rain",label:"Garoa",icon:"🌦️"};
+  if(code>=71&&code<=77)return{key:"cold",label:"Neve / frio intenso",icon:"❄️"};
+  if(code===45||code===48)return{key:"cloudy",label:"Neblina",icon:"🌫️"};
+  if(wind>=40)return{key:"wind",label:"Vento forte",icon:"💨"};
+  if(temp<=10)return{key:"cold",label:"Tempo frio",icon:"🥶"};
+  if(temp>=30)return{key:"hot",label:"Calor intenso",icon:"🥵"};
+  if(humidity<=35&&temp>=22)return{key:"dry",label:"Tempo seco",icon:"☀️"};
+  if(code===0)return{key:"clear",label:"Céu limpo",icon:"☀️"};
+  if(code<=3)return{key:"cloudy",label:"Parcialmente nublado",icon:"⛅"};
+  return{key:"cloudy",label:"Nublado",icon:"☁️"};
+}
+
+function applyWeatherTips(key){
+  const tip=CONTENT.weatherTips[key]||CONTENT.weatherTips.clear;
+  const list=tip.tips||["Beba água ao longo do dia."];
+  $("weatherTip").textContent=`${tip.title}: ${list[day%list.length]} Lembrete: tome água.`;
+}
+
+async function loadWeather(){
+  const url="https://api.open-meteo.com/v1/forecast?latitude=-29.6064&longitude=-52.1917&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m,cloud_cover&timezone=America%2FSao_Paulo";
+  try{
+    const res=await fetch(url);
+    if(!res.ok)throw new Error("weather");
+    const data=await res.json();
+    const c=data.current||{};
+    const mapped=mapWeather(Number(c.weather_code||3),Number(c.temperature_2m||20),Number(c.relative_humidity_2m||50),Number(c.wind_speed_10m||0));
+    currentWeatherKey=mapped.key;
+    document.body.dataset.weather=mapped.key;
+    $("weatherIcon").textContent=mapped.icon;
+    $("weatherLabel").textContent=mapped.label;
+    $("weatherMeta").textContent=`${Number(c.temperature_2m).toFixed(1)}°C · sensação ${Number(c.apparent_temperature).toFixed(1)}°C · umidade ${c.relative_humidity_2m}% · vento ${Number(c.wind_speed_10m).toFixed(0)} km/h`;
+    applyWeatherTips(mapped.key);
+  }catch{
+    document.body.dataset.weather="cloudy";
+    $("weatherIcon").textContent="⛅";
+    $("weatherLabel").textContent="Tempo indisponível no momento";
+    $("weatherMeta").textContent="Venâncio Aires · RS — tente novamente em breve";
+    applyWeatherTips("cloudy");
+  }
+}
+
+function bmiCategory(bmi){
+  if(bmi<18.5)return"underweight";
+  if(bmi<25)return"normal";
+  if(bmi<30)return"overweight";
+  return"obesity";
+}
+
+function bmiLabel(cat){
+  return({underweight:"Abaixo do peso",normal:"Peso adequado",overweight:"Sobrepeso",obesity:"Obesidade"})[cat]||cat;
+}
+
+function estimateBodyFat(bmi,age,sex){
+  // Deurenberg et al. (estimativa)
+  const sexVal=sex==="m"?1:0;
+  return(1.20*bmi)+(0.23*age)-(10.8*sexVal)-5.4;
+}
+
+function waterLiters(weightKg,weatherKey){
+  let ml=35*weightKg;
+  if(weatherKey==="hot"||weatherKey==="dry")ml=40*weightKg;
+  if(weatherKey==="cold")ml=32*weightKg;
+  if(weatherKey==="storm"||weatherKey==="rain")ml=34*weightKg;
+  return Math.max(1.5,ml/1000);
+}
+
+function renderDiet(category){
+  const diet=CONTENT.diets[category]||CONTENT.diets.normal;
+  if(!diet)return;
+  lastCalcCategory=category;
+  document.querySelectorAll(".diet-tab").forEach(btn=>{
+    btn.classList.toggle("is-active",btn.dataset.diet===category);
+  });
+  $("dietTitle").textContent=diet.label;
+  $("dietGoal").textContent=diet.goal;
+  $("dietPrep").innerHTML=(diet.prep||[]).map(p=>`<li>${p}</li>`).join("");
+  $("dietWeek").innerHTML=(diet.week||[]).map(dayItem=>`
+    <article class="diet-day">
+      <strong>${dayItem.day}</strong>
+      <span>Café: ${dayItem.breakfast}</span>
+      <span>Almoço: ${dayItem.lunch}</span>
+      <span>Lanche: ${dayItem.snack}</span>
+      <span>Jantar: ${dayItem.dinner}</span>
+    </article>
+  `).join("");
+}
+
+function runCalculator(){
+  const weight=Number($("calcWeight").value);
+  const heightCm=Number($("calcHeight").value);
+  const age=Number($("calcAge").value)||60;
+  const sex=$("calcSex").value;
+  const name=($("calcName").value||"").trim();
+
+  if(!weight||!heightCm||weight<30||heightCm<100){
+    toast("Preencha peso e altura válidos.");
+    return;
+  }
+
+  const heightM=heightCm/100;
+  const bmi=weight/(heightM*heightM);
+  const cat=bmiCategory(bmi);
+  const fat=estimateBodyFat(bmi,age,sex);
+  const water=waterLiters(weight,currentWeatherKey);
+  const who=name?`${name}: `:"";
+
+  $("calcResult").hidden=false;
+  $("calcImcLabel").textContent=`${who}IMC ${bmi.toFixed(1)} — ${bmiLabel(cat)}`;
+  $("calcDetails").textContent=`Estimativa de gordura corporal: ${Math.max(5,fat).toFixed(1)}% (fórmula aproximada de Deurenberg).`;
+  $("calcWater").textContent=`Água sugerida hoje: cerca de ${water.toFixed(1)} litros (${Math.round(water*1000)} ml), ajustada ao clima atual.`;
+  renderDiet(cat);
+  $("dietas").scrollIntoView({behavior:"smooth",block:"start"});
+  toast("Cálculo pronto. Veja também o cardápio da semana.");
+  localStorage.setItem("ivone-calc",JSON.stringify({weight,heightCm,age,sex,name}));
+}
+
+// boot UI text
 $("personalGreeting").textContent=`${greeting()}, Ivone e Osvaldo.`;
 $("todayDate").textContent=new Intl.DateTimeFormat("pt-BR",{weekday:"long",day:"numeric",month:"long",year:"numeric"}).format(now);
-$("dailyMessage").textContent=dailyMessages[day%dailyMessages.length];
-$("dailyAffirmation").textContent=affirmations[day%affirmations.length];
-renderPrayer();renderReflection();
-const savedSon=Number(localStorage.getItem("ivone-son-index"));if(Number.isFinite(savedSon))sonIndex=savedSon%sonMessages.length;renderSon();
+$("dailyMessage").textContent=CONTENT.dailyMessages[day%CONTENT.dailyMessages.length];
+$("dailyAffirmation").textContent=CONTENT.affirmations[day%CONTENT.affirmations.length];
+renderParentMessages();
+renderPrayer();
+renderReflection();
+renderBible();
+renderDiet("normal");
+const savedSon=Number(localStorage.getItem("ivone-son-index"));
+if(Number.isFinite(savedSon))sonIndex=savedSon%sonMessages.length;
+renderSon();
 showSpecialDay();
+updateClock();
+setInterval(updateClock,1000);
+loadWeather();
+setInterval(loadWeather,15*60*1000);
+
+try{
+  const savedCalc=JSON.parse(localStorage.getItem("ivone-calc")||"null");
+  if(savedCalc){
+    $("calcWeight").value=savedCalc.weight??"";
+    $("calcHeight").value=savedCalc.heightCm??"";
+    $("calcAge").value=savedCalc.age??"";
+    $("calcSex").value=savedCalc.sex||"f";
+    $("calcName").value=savedCalc.name||"";
+  }
+}catch{}
 
 (()=>{
   const photo=$("lovePhoto");
@@ -190,14 +337,33 @@ showSpecialDay();
   real.src="assets/foto-carinho.jpg";
 })();
 
-$("newPrayerButton").onclick=()=>{prayerIndex=(prayerIndex+1)%prayers.length;renderPrayer()};
-$("newReflectionButton").onclick=()=>{reflectionIndex=(reflectionIndex+1)%spiritReadings.length;renderReflection()};
-const nextSon=()=>{sonIndex=(sonIndex+1)%sonMessages.length;localStorage.setItem("ivone-son-index",sonIndex);renderSon()};
+$("newParentMessages").onclick=()=>{parentMsgOffset+=1;renderParentMessages();toast("Novas mensagens deste horário.");};
+$("newBibleStory").onclick=()=>{bibleIndex=(bibleIndex+1)%CONTENT.bibleStories.length;renderBible();};
+$("newPrayerButton").onclick=()=>{prayerIndex=(prayerIndex+1)%prayers.length;renderPrayer();};
+$("newReflectionButton").onclick=()=>{reflectionIndex=(reflectionIndex+1)%spiritReadings.length;renderReflection();};
+const nextSon=()=>{sonIndex=(sonIndex+1)%sonMessages.length;localStorage.setItem("ivone-son-index",sonIndex);renderSon();};
 $("nextSonMessage").onclick=nextSon;
 $("nightNextSon").onclick=nextSon;
+$("calcButton").onclick=runCalculator;
+$("calcClear").onclick=()=>{
+  ["calcName","calcWeight","calcHeight","calcAge"].forEach(id=>$(id).value="");
+  $("calcResult").hidden=true;
+  localStorage.removeItem("ivone-calc");
+};
+$("waterReminderBtn").onclick=()=>toast("Hora de beber um copo de água 💧");
+setInterval(()=>{
+  if(!document.body.classList.contains("sleep-mode")&&!document.hidden){
+    toast("Lembrete suave: tome um gole de água 💧");
+  }
+},50*60*1000);
+
+document.querySelectorAll(".diet-tab").forEach(btn=>{
+  btn.onclick=()=>renderDiet(btn.dataset.diet);
+});
 
 const savedTheme=localStorage.getItem("ivone-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");
-document.documentElement.dataset.theme=savedTheme;$("themeToggle").textContent=savedTheme==="dark"?"☀":"☾";
+document.documentElement.dataset.theme=savedTheme;
+$("themeToggle").textContent=savedTheme==="dark"?"☀":"☾";
 $("themeToggle").onclick=()=>{
   if(sleepMode)return;
   const next=document.documentElement.dataset.theme==="dark"?"light":"dark";
@@ -211,28 +377,17 @@ function openStep(step){
     el.classList.toggle("is-open",Number(el.dataset.step)===step);
   });
 }
-
-function updateNightFinish(){
-  const done=completedSteps.size>=3;
-  $("nightFinish").hidden=!done;
-}
-
+function updateNightFinish(){$("nightFinish").hidden=completedSteps.size<3;}
 function completeStep(step){
   completedSteps.add(step);
   const el=document.querySelector(`.night-step[data-step="${step}"]`);
   if(el)el.classList.add("is-done");
   updateNightFinish();
-  const next=step+1;
-  if(next<=3)openStep(next);
+  if(step+1<=3)openStep(step+1);
   toast(step===3?"Rotina concluída. Descanse com paz.":`Passo ${step} concluído.`);
 }
-
-document.querySelectorAll("[data-open-step]").forEach(btn=>{
-  btn.onclick=()=>openStep(Number(btn.dataset.openStep));
-});
-document.querySelectorAll("[data-complete-step]").forEach(btn=>{
-  btn.onclick=()=>completeStep(Number(btn.dataset.completeStep));
-});
+document.querySelectorAll("[data-open-step]").forEach(btn=>{btn.onclick=()=>openStep(Number(btn.dataset.openStep));});
+document.querySelectorAll("[data-complete-step]").forEach(btn=>{btn.onclick=()=>completeStep(Number(btn.dataset.completeStep));});
 
 function enterSleepMode(){
   if(sleepMode)return;
@@ -247,7 +402,6 @@ function enterSleepMode(){
   $("rotina-noturna").scrollIntoView({behavior:"smooth",block:"start"});
   toast("Modo dormir ativado.");
 }
-
 function exitSleepMode(){
   if(!sleepMode)return;
   sleepMode=false;
@@ -259,12 +413,9 @@ function exitSleepMode(){
   $("themeToggle").textContent=document.documentElement.dataset.theme==="dark"?"☀":"☾";
   toast("Modo dormir encerrado.");
 }
-
-$("sleepToggle").onclick=()=>{sleepMode?exitSleepMode():enterSleepMode()};
+$("sleepToggle").onclick=()=>{sleepMode?exitSleepMode():enterSleepMode();};
 $("exitSleep").onclick=exitSleepMode;
-$("startNightButton").onclick=()=>{
-  enterSleepMode();
-};
+$("startNightButton").onclick=enterSleepMode;
 
 const backgroundMusic=new Audio("assets/luz_serena.mp3");
 backgroundMusic.loop=true;
@@ -284,7 +435,6 @@ function formatTime(sec){
   const s=Math.floor(sec%60);
   return`${m}:${String(s).padStart(2,"0")}`;
 }
-
 function setMiguelProgress(){
   const seek=$("miguelSeek");
   const duration=miguelAudio.duration||0;
@@ -295,7 +445,6 @@ function setMiguelProgress(){
   $("miguelCurrent").textContent=formatTime(current);
   if(duration)$("miguelDuration").textContent=formatTime(duration);
 }
-
 function setMiguelPlayingUI(playing){
   miguelPlaying=playing;
   const btn=$("miguelPlay");
@@ -304,7 +453,6 @@ function setMiguelPlayingUI(playing){
   btn.setAttribute("aria-label",playing?"Pausar oração do Arcanjo Miguel":"Tocar oração do Arcanjo Miguel");
   btn.title=playing?"Pausar":"Tocar";
 }
-
 function pauseAmbientMusic(){
   if(!sound)return;
   sound=false;
@@ -312,13 +460,11 @@ function pauseAmbientMusic(){
   $("soundToggle").textContent="♫";
   $("soundToggle").title="Tocar música";
 }
-
 function pauseMiguelPrayer(){
   if(!miguelPlaying&&miguelAudio.paused)return;
   miguelAudio.pause();
   setMiguelPlayingUI(false);
 }
-
 function fadeMusic(targetVolume,duration=1200){
   clearInterval(volumeTimer);
   const initial=backgroundMusic.volume;
@@ -392,7 +538,7 @@ miguelAudio.addEventListener("ended",()=>{
   if(!completedSteps.has(1))completeStep(1);
   else toast("Que o Arcanjo Miguel guarde o seu sono.");
 });
-miguelAudio.addEventListener("pause",()=>{if(!miguelAudio.ended)setMiguelPlayingUI(false)});
+miguelAudio.addEventListener("pause",()=>{if(!miguelAudio.ended)setMiguelPlayingUI(false);});
 miguelAudio.addEventListener("play",()=>setMiguelPlayingUI(true));
 
 document.addEventListener("visibilitychange",()=>{
@@ -446,12 +592,27 @@ $("nightTimerButton").onclick=()=>{
   },1000);
 };
 
-const gratitudeIds=["gratitude1","gratitude2","gratitude3"],gratitudeKey=`ivone-gratitude-${dayKey}`,intentionKey=`ivone-intention-${dayKey}`;
-try{const saved=JSON.parse(localStorage.getItem(gratitudeKey)||"[]");gratitudeIds.forEach((id,i)=>$(id).value=saved[i]||"")}catch{}
+const gratitudeIds=["gratitude1","gratitude2","gratitude3"];
+const gratitudeKey=`ivone-gratitude-${dayKey}`;
+const intentionKey=`ivone-intention-${dayKey}`;
+try{
+  const saved=JSON.parse(localStorage.getItem(gratitudeKey)||"[]");
+  gratitudeIds.forEach((id,i)=>$(id).value=saved[i]||"");
+}catch{}
 $("prayerIntention").value=localStorage.getItem(intentionKey)||"";
-$("saveGratitude").onclick=()=>{localStorage.setItem(gratitudeKey,JSON.stringify(gratitudeIds.map(id=>$(id).value.trim())));$("gratitudeStatus").textContent="Sua gratidão foi guardada com carinho neste aparelho. 🌿"};
-$("saveIntention").onclick=()=>{localStorage.setItem(intentionKey,$("prayerIntention").value.trim());$("intentionStatus").textContent="Sua intenção foi guardada para este dia. ✨"};
-$("clearIntention").onclick=()=>{$("prayerIntention").value="";localStorage.removeItem(intentionKey);$("intentionStatus").textContent="A intenção foi apagada."};
+$("saveGratitude").onclick=()=>{
+  localStorage.setItem(gratitudeKey,JSON.stringify(gratitudeIds.map(id=>$(id).value.trim())));
+  $("gratitudeStatus").textContent="Sua gratidão foi guardada com carinho neste aparelho. 🌿";
+};
+$("saveIntention").onclick=()=>{
+  localStorage.setItem(intentionKey,$("prayerIntention").value.trim());
+  $("intentionStatus").textContent="Sua intenção foi guardada para este dia. ✨";
+};
+$("clearIntention").onclick=()=>{
+  $("prayerIntention").value="";
+  localStorage.removeItem(intentionKey);
+  $("intentionStatus").textContent="A intenção foi apagada.";
+};
 
 let paused=false,phaseTimers=[];
 function setBreathTexts(inspire){
@@ -467,7 +628,8 @@ function breathing(){
     setTimeout(()=>setBreathTexts("Expire"),5800)
   ];
 }
-breathing();setInterval(breathing,10000);
+breathing();
+setInterval(breathing,10000);
 $("breathingToggle").onclick=()=>{
   paused=!paused;
   document.querySelectorAll(".breathing-stage").forEach(el=>el.classList.toggle("paused",paused));
@@ -477,12 +639,12 @@ $("breathingToggle").onclick=()=>{
 };
 
 const dialog=$("prayerDialog");
-$("quickPrayerButton").onclick=()=>{renderPrayer();dialog.showModal()};
+$("quickPrayerButton").onclick=()=>{renderPrayer();dialog.showModal();};
 $("closeDialog").onclick=()=>dialog.close();
 $("amenButton").onclick=()=>dialog.close();
 
 const observer=new IntersectionObserver(entries=>entries.forEach(e=>{
-  if(e.isIntersecting){e.target.classList.add("visible");observer.unobserve(e.target)}
+  if(e.isIntersecting){e.target.classList.add("visible");observer.unobserve(e.target);}
 }),{threshold:.12});
 document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
 

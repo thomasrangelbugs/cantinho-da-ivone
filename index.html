@@ -10,8 +10,18 @@
   <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <div class="animated-bg" aria-hidden="true">
+<body data-sky="morning" data-weather="cloudy">
+  <div class="animated-bg" aria-hidden="true" id="skyBg">
+    <div class="sky-wash"></div>
+    <div class="celestial sun-morning"></div>
+    <div class="celestial sun-afternoon"></div>
+    <div class="celestial moon"></div>
+    <div class="clouds cloud-a"></div>
+    <div class="clouds cloud-b"></div>
+    <div class="clouds cloud-c"></div>
+    <div class="weather-layer rain-layer"></div>
+    <div class="weather-layer storm-layer"></div>
+    <div class="weather-layer wind-layer"></div>
     <span class="orb orb1"></span><span class="orb orb2"></span><span class="orb orb3"></span>
     <span class="leaf leaf1">❧</span><span class="leaf leaf2">❧</span><span class="leaf leaf3">❧</span>
     <div class="stars"></div>
@@ -25,6 +35,26 @@
       <button class="icon-btn" id="themeToggle" title="Modo noturno" aria-label="Modo noturno">☾</button>
     </div>
   </header>
+
+  <section class="weather-bar shell" id="weatherBar" aria-live="polite">
+    <div class="weather-main">
+      <div class="weather-icon" id="weatherIcon">⛅</div>
+      <div>
+        <p class="eyebrow">Venâncio Aires · RS</p>
+        <strong id="weatherLabel">Carregando o tempo…</strong>
+        <p class="weather-meta" id="weatherMeta">Temperatura e umidade em breve</p>
+      </div>
+    </div>
+    <div class="weather-clock">
+      <time id="liveClock">--:--:--</time>
+      <small id="liveDate"></small>
+    </div>
+    <div class="weather-tips">
+      <p class="eyebrow">Dica de saúde</p>
+      <p id="weatherTip">Beba água ao longo do dia.</p>
+      <button class="btn soft" id="waterReminderBtn" type="button">💧 Lembrete de água</button>
+    </div>
+  </section>
 
   <div class="sleep-bar" id="sleepBar" hidden>
     <p>Modo dormir — tela suave para descansar</p>
@@ -151,12 +181,85 @@
     <div class="day-content">
       <section class="shell" id="mensagem">
         <article class="card daily reveal">
-          <span class="big-icon">☀️</span>
-          <p class="eyebrow">Mensagem do dia</p>
-          <h2>Uma palavra para o seu coração</h2>
-          <blockquote id="dailyMessage"></blockquote>
-          <p class="note"><time id="todayDate"></time> · Uma nova mensagem aparece a cada dia.</p>
+          <span class="big-icon" id="periodIcon">☀️</span>
+          <p class="eyebrow" id="periodLabel">Mensagens do horário</p>
+          <h2>Uma palavra para o coração de vocês</h2>
+          <div class="parent-messages">
+            <div class="parent-msg">
+              <span class="eyebrow">Para Ivone</span>
+              <blockquote id="msgIvone"></blockquote>
+            </div>
+            <div class="parent-msg">
+              <span class="eyebrow">Para Osvaldo</span>
+              <blockquote id="msgOsvaldo"></blockquote>
+            </div>
+          </div>
+          <p class="note"><time id="todayDate"></time> · Mensagens de bom dia, boa tarde e boa noite conforme o horário.</p>
+          <div class="actions" style="justify-content:center">
+            <button class="btn soft" id="newParentMessages" type="button">Outras mensagens deste horário</button>
+          </div>
+          <div class="affirmation"><span>Mensagem do dia</span><strong id="dailyMessage"></strong></div>
           <div class="affirmation"><span>Afirmação de hoje</span><strong id="dailyAffirmation"></strong></div>
+        </article>
+      </section>
+
+      <section class="shell" id="historia-biblica">
+        <article class="card bible reveal">
+          <div class="heading"><span>✝️</span><div><p class="eyebrow">Reflexão bíblica do dia</p><h2 id="bibleTitle">História de afeto e aprendizado</h2></div></div>
+          <p class="source" id="bibleRef"></p>
+          <p class="reading" id="bibleStory"></p>
+          <div class="affirmation"><span>Como agir para ser boa pessoa</span><strong id="bibleLesson"></strong></div>
+          <button class="btn soft" id="newBibleStory" type="button">Ler outra história</button>
+        </article>
+      </section>
+
+      <section class="shell" id="saude">
+        <article class="card reveal">
+          <div class="heading"><span>⚖️</span><div><p class="eyebrow">Cuidado com a saúde</p><h2>Calculadora de IMC, gordura e água</h2></div></div>
+          <p>Informe peso e altura para ver o índice de massa corporal, uma estimativa de gordura corporal e a quantidade de água recomendada. Isto é orientação geral — não substitui consulta médica.</p>
+          <div class="calc-grid">
+            <label>Nome (opcional)<input id="calcName" maxlength="40" placeholder="Ivone ou Osvaldo"></label>
+            <label>Peso (kg)<input id="calcWeight" type="number" min="30" max="250" step="0.1" placeholder="70"></label>
+            <label>Altura (cm)<input id="calcHeight" type="number" min="100" max="230" step="1" placeholder="165"></label>
+            <label>Idade<input id="calcAge" type="number" min="18" max="120" step="1" placeholder="60"></label>
+            <label>Sexo
+              <select id="calcSex">
+                <option value="f">Feminino</option>
+                <option value="m">Masculino</option>
+              </select>
+            </label>
+          </div>
+          <div class="actions">
+            <button class="btn primary" id="calcButton" type="button">Calcular</button>
+            <button class="btn text" id="calcClear" type="button">Limpar</button>
+          </div>
+          <div class="calc-result" id="calcResult" hidden>
+            <p><strong id="calcImcLabel"></strong></p>
+            <p id="calcDetails"></p>
+            <p id="calcWater"></p>
+            <p class="note" id="calcDisclaimer">Estimativas educativas. Em caso de dúvida, procure um profissional de saúde.</p>
+          </div>
+        </article>
+      </section>
+
+      <section class="shell" id="dietas">
+        <article class="card reveal">
+          <div class="heading"><span>🥗</span><div><p class="eyebrow">Cardápio da semana</p><h2>Dietas e modos de preparo</h2></div></div>
+          <p>Escolha o resultado da calculadora (ou o perfil desejado) para ver um menu de 7 dias e dicas de preparo.</p>
+          <div class="diet-tabs" id="dietTabs" role="tablist">
+            <button class="btn soft diet-tab is-active" data-diet="normal" type="button">Peso adequado</button>
+            <button class="btn soft diet-tab" data-diet="underweight" type="button">Abaixo do peso</button>
+            <button class="btn soft diet-tab" data-diet="overweight" type="button">Sobrepeso</button>
+            <button class="btn soft diet-tab" data-diet="obesity" type="button">Obesidade</button>
+          </div>
+          <div id="dietPanel">
+            <h3 id="dietTitle"></h3>
+            <p id="dietGoal"></p>
+            <h4>Modos de preparar</h4>
+            <ul id="dietPrep"></ul>
+            <h4>Menu da semana</h4>
+            <div class="diet-week" id="dietWeek"></div>
+          </div>
         </article>
       </section>
 
@@ -270,6 +373,7 @@
 
   <div class="toast" id="toast"></div>
   <footer class="day-content"><p>Cantinho da Ivone e do Osvaldo • Feito com amor por Thomas Rangel Bugs.</p><small>Um espaço pessoal de fé, esperança e serenidade para os meus pais.</small></footer>
+  <script src="content.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

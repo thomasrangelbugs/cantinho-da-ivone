@@ -351,7 +351,8 @@ body.sleep-mode{
 }
 body.sleep-mode .day-content,
 body.sleep-mode .hero,
-body.sleep-mode .birthday-shell{display:none!important}
+body.sleep-mode .birthday-shell,
+body.sleep-mode .weather-bar{display:none!important}
 body.sleep-mode .animated-bg{background:radial-gradient(circle at 50% 0%,rgba(90,110,80,.18),transparent 40%),#0b100d}
 body.sleep-mode .orb,.leaf{opacity:.12}
 body.sleep-mode #rotina-noturna{margin-top:18px;margin-bottom:40px}
@@ -386,4 +387,73 @@ body.sleep-mode #sleepToggle{background:var(--soft)}
 }
 @media(prefers-reduced-motion:reduce){
   *,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+
+/* Weather sky + new sections */
+.sky-wash{position:absolute;inset:0;transition:background 1.2s ease}
+.celestial{position:absolute;border-radius:50%;opacity:0;transition:opacity .8s,transform 1.2s;pointer-events:none}
+.sun-morning{width:120px;height:120px;top:12%;right:14%;background:radial-gradient(circle,#ffe08a 0%,#ffb84d 45%,rgba(255,180,60,0) 70%);box-shadow:0 0 60px rgba(255,190,80,.45)}
+.sun-afternoon{width:140px;height:140px;top:18%;right:10%;background:radial-gradient(circle,#ffd36b 0%,#ff8f4a 50%,rgba(255,120,50,0) 72%);box-shadow:0 0 70px rgba(255,140,60,.4)}
+.moon{width:78px;height:78px;top:12%;right:16%;background:radial-gradient(circle at 35% 35%,#f7f1d8,#d9d2b0 60%,rgba(217,210,176,0) 72%);box-shadow:0 0 40px rgba(230,220,180,.35)}
+body[data-sky=morning] .sun-morning{opacity:1;transform:translateY(0)}
+body[data-sky=afternoon] .sun-afternoon{opacity:1}
+body[data-sky=night] .moon{opacity:1}
+body[data-sky=morning] .sky-wash{background:linear-gradient(180deg,#9ec9ef 0%,#d9ebff 35%,transparent 70%)}
+body[data-sky=afternoon] .sky-wash{background:linear-gradient(180deg,#f2b878 0%,#f7d9a8 30%,transparent 68%)}
+body[data-sky=night] .sky-wash{background:linear-gradient(180deg,#0d1a2b 0%,#1a2c3d 40%,transparent 75%)}
+body[data-sky=night] .stars{opacity:.85}
+.clouds{position:absolute;width:180px;height:60px;border-radius:60px;background:rgba(255,255,255,.55);filter:blur(1px);opacity:0;animation:cloudDrift 40s linear infinite}
+.clouds:before,.clouds:after{content:'';position:absolute;border-radius:50%;background:inherit}
+.clouds:before{width:70px;height:70px;top:-28px;left:30px}
+.clouds:after{width:90px;height:90px;top:-40px;left:80px}
+.cloud-a{top:16%;left:-10%}.cloud-b{top:28%;left:30%;animation-duration:55s;opacity:0}.cloud-c{top:20%;left:65%;animation-duration:48s}
+body[data-weather=cloudy] .clouds,body[data-weather=rain] .clouds,body[data-weather=storm] .clouds{opacity:.7}
+body[data-weather=clear] .cloud-a{opacity:.25}
+@keyframes cloudDrift{from{transform:translateX(0)}to{transform:translateX(40vw)}}
+.weather-layer{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .6s}
+.rain-layer{background-image:repeating-linear-gradient(120deg,transparent 0 12px,rgba(160,190,220,.28) 12px 13px);animation:rainFall 0.9s linear infinite}
+.storm-layer{background:linear-gradient(180deg,rgba(30,40,55,.35),transparent 50%);box-shadow:inset 0 0 120px rgba(20,30,50,.35)}
+.wind-layer{background:repeating-linear-gradient(95deg,transparent 0 40px,rgba(255,255,255,.08) 40px 42px);animation:windMove 2.2s linear infinite}
+body[data-weather=rain] .rain-layer,body[data-weather=storm] .rain-layer{opacity:1}
+body[data-weather=storm] .storm-layer{opacity:1;animation:flash 7s ease-in-out infinite}
+body[data-weather=wind] .wind-layer{opacity:1}
+body[data-weather=dry] .sky-wash{filter:saturate(1.15) brightness(1.05)}
+body[data-weather=cold] .sky-wash{filter:saturate(.75) brightness(.95)}
+body[data-weather=hot] .sun-morning,body[data-weather=hot] .sun-afternoon{opacity:1;filter:brightness(1.15)}
+@keyframes rainFall{to{background-position:20px 40px}}
+@keyframes windMove{to{background-position:80px 0}}
+@keyframes flash{0%,90%,100%{opacity:.35}92%{opacity:.8}94%{opacity:.3}96%{opacity:.75}}
+
+.weather-bar{
+  margin-top:16px;display:grid;grid-template-columns:1.4fr .9fr 1.2fr;gap:16px;align-items:center;
+  padding:16px 18px;border:1px solid var(--border);border-radius:22px;background:var(--surface);
+  backdrop-filter:blur(16px);box-shadow:var(--shadow);
+}
+.weather-main{display:flex;gap:14px;align-items:center}
+.weather-icon{font-size:2.4rem;line-height:1}
+.weather-meta{margin:4px 0 0;color:var(--muted);font-size:.92rem}
+.weather-clock{text-align:center}
+.weather-clock time{display:block;font:700 clamp(1.8rem,4vw,2.4rem)/1 var(--font-display);color:var(--green2);font-variant-numeric:tabular-nums}
+.weather-clock small{color:var(--muted)}
+.weather-tips .eyebrow{margin-bottom:4px}
+.weather-tips p{margin:0 0 10px;color:var(--muted)}
+.parent-messages{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:22px 0;text-align:left}
+.parent-msg{padding:18px;border-radius:18px;border:1px solid var(--border);background:color-mix(in srgb,var(--surface2) 80%,transparent)}
+.parent-msg blockquote{margin:10px 0 0;color:var(--green2);font-size:clamp(1.2rem,2.5vw,1.55rem);line-height:1.35}
+.calc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0}
+.calc-grid label{display:grid;gap:6px;font-size:.88rem;color:var(--muted);font-weight:600}
+.calc-grid select{width:100%;border:1px solid var(--border);border-radius:14px;padding:14px 15px;background:var(--surface2);color:var(--text)}
+.calc-result{margin-top:16px;padding:16px 18px;border-radius:16px;background:color-mix(in srgb,var(--soft) 60%,transparent);border:1px solid var(--border)}
+.diet-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+.diet-tab.is-active{background:var(--green);color:#fff}
+.diet-week{display:grid;gap:12px;margin-top:12px}
+.diet-day{padding:14px 16px;border-radius:14px;border:1px solid var(--border);background:var(--surface2)}
+.diet-day strong{display:block;color:var(--green2);font:600 1.1rem var(--font-display);margin-bottom:6px}
+.diet-day span{display:block;color:var(--muted);font-size:.92rem;margin:3px 0}
+.bible .affirmation{margin-top:18px}
+#dietPrep{margin:8px 0 18px;padding-left:18px;color:var(--muted)}
+#dietTitle{margin:8px 0 6px;color:var(--green2);font:600 1.5rem var(--font-display)}
+@media(max-width:900px){
+  .weather-bar,.parent-messages,.calc-grid{grid-template-columns:1fr}
+  .weather-clock{text-align:left}
 }
